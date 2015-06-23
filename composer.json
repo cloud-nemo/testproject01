@@ -8,5 +8,23 @@
             "name": "cloud nemo",
             "email": "sharklasersareworthlessagainstfirespittingunicorns@web.de"
         }
-    ]
+    ],
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "winjs",
+                "version": "4.0.0",
+                "source": {
+                    "url": "https://github.com/winjs/winjs.git",
+                    "type": "git",
+                    "no-api": true,
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+    "require": {
+        "winjs": "v4.0.0"
+    }
 }
