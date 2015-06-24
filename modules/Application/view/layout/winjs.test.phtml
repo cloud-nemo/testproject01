@@ -1,0 +1,109 @@
+<?php
+/**
+ * winjs.test.phtml
+ *
+ * @copyright Copyright © 2015 cloud-nemo
+ * @author    cloud-nemo
+ */
+?>
+<script type="application/javascript">
+    function runEnterPageAnimation() {
+        // Get user selection from control
+        var pageSections = document.getElementById("pageSectionsControl").value;
+        document.querySelector(".box").style.overflow = "hidden";
+
+        // Animate the application's entrance in the number of stages chosen by the user
+        // Use the recommended offset by leaving the offset argument empty to get the best performance
+        var enterPage;
+        var rootGrid = document.getElementById("rootGrid");
+        var pageContent = document.getElementById("pageContent");
+        var header = document.querySelector("header");
+        var footer = document.querySelector("footer");
+        switch (pageSections) {
+            case "1":
+                // Animate the whole page together
+                enterPage = WinJS.UI.Animation.enterPage(rootGrid, null);
+                break;
+            case "2":
+                // Stagger the header and body
+                enterPage = WinJS.UI.Animation.enterPage([header, [pageContent, footer]], null);
+                break;
+            case "3":
+                // Stagger the header, input, and output areas
+                enterPage = WinJS.UI.Animation.enterPage([header, pageContent, footer], null);
+                break;
+        }
+        document.getElementById("message").textContent = "Page appeared in " + pageSections + " section(s).";
+    }
+    var runAnimation = document.getElementById("runAnimation");
+    runAnimation.addEventListener("click", runEnterPageAnimation, false);
+
+    function navBarInvoked(ev) {
+        var navbarCommand = ev.detail.navbarCommand;
+        log(navbarCommand.label + " NavBarCommand invoked<br/>");
+    }
+
+    function log(msg) {
+        var statusEl = document.getElementById("status");
+        statusEl.innerHTML += msg;
+        statusEl.scrollTop = statusEl.scrollHeight;
+    }
+
+    function toggleNavBarVisibility(ev) {
+        document.getElementById('createNavBar').winControl.open();
+    }
+
+    WinJS.Namespace.define("Sample", {
+        navBarInvoked: WinJS.UI.eventHandler(navBarInvoked)
+    });
+
+    WinJS.UI.processAll().done(function () {
+        document.getElementById('toggleNavBar').addEventListener('click', toggleNavBarVisibility);
+    });
+
+</script>
+<div id="top" class="win-menulayout">
+    <div id="createNavBar" data-win-control="WinJS.UI.NavBar"
+         data-win-options="{placement: 'bottom', oninvoked: Sample.navBarInvoked}">
+        <div data-win-control="WinJS.UI.NavBarContainer">
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{ label: 'Home', icon: 'home' }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{ label: 'Favorite', icon: 'favorite' }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{ label: 'Delete', icon: 'delete' }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{ label: 'Music', icon: 'audio' }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{ label: 'Edit', icon: 'edit' }"></div>
+            <div data-win-control="WinJS.UI.NavBarCommand"
+                 data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div id="pane">
+            <button class="win-button" id="toggleNavBar">Show NavBar</button><br /><br />
+            <div id="status" style="overflow: auto; max-height: 240px;"></div><br />
+        </div>
+    </div>
+</div>
+<div class="box">
+    <div class="inputOptions">
+        <label for="pageSectionsControl">Number of page sections that animate separately:</label>
+        <select class="win-dropdown" id="pageSectionsControl">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option selected="selected" value="3">3</option>
+        </select>
+    </div>
+
+    <button class="win-button" id="runAnimation">Run animation</button>
+    <br /><br />
+    <div id="message"></div>
+    <div id="rootGrid">
+        <header>header here</header>
+        <div id="pageContent">page content here</div>
+        <footer>footer here</footer>
+    </div>
+</div>
+<footer></footer>
