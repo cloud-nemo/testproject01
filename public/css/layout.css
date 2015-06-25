@@ -2,7 +2,9 @@ div {
     margin: 0;
 }
 footer {
-    margin: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 footer > p {
     margin: .5em 20em;
