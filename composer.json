@@ -3,7 +3,7 @@
     "license": "GNU GPL v2.0",
     "require": {
         "php": ">=5.5",
-        "zendframework/zendframework": "~2.5"
+        "zendframework/zendframework": "2.4"
     },
     "authors": [
         {
@@ -11,5 +11,5 @@
             "email": "t8a3o@web.de"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }

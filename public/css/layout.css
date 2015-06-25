@@ -1,0 +1,20 @@
+div {
+    margin: 0;
+}
+footer {
+    margin: 0;
+}
+footer > p {
+    margin: .5em 20em;
+}
+nav {
+    margin: 0;
+}
+nav > div {
+    margin: 0 20em;
+}
+.container {
+}
+#pageContent {
+    margin: 2.5em 20em;
+}
