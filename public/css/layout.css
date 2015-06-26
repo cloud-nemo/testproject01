@@ -1,22 +1,26 @@
+body {
+    overflow-x: scroll;
+}
 div {
     margin: 0;
+}
+.win-navbar.win-navbar-minimal {
+    min-height: 30px;
+}
+.win-navbar .win-navbar-invokebutton {
+    height: 28px;
+}
+.container {
+}
+#pageContent {
+    margin: 2.5em 5em;
 }
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    background-color: inherit;
 }
 footer > p {
-    margin: .5em 20em;
-}
-nav {
-    margin: 0;
-}
-nav > div {
-    margin: 0 20em;
-}
-.container {
-}
-#pageContent {
-    margin: 2.5em 20em;
+    margin: .5em 5em;
 }

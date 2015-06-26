@@ -1,8 +1,14 @@
+# set environment for runmode
+SetEnv APPLICATION_ENV "local"
+
 Options +FollowSymlinks -Indexes
 
 RewriteEngine on
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [NC,L]
+
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d

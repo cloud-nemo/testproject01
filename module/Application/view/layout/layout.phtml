@@ -23,36 +23,40 @@ echo $this->doctype(); ?>
             'rel' => 'shortcut icon',
             'type' => 'image/png',
             'href' => $this->basePath() . '/image/favicon.png'))
-        ->prependStylesheet($this->basePath('css/ui-dark.css'))
-        ->prependStylesheet($this->basePath('css/layout.css'));
+        ->prependStylesheet($this->basePath('css/layout.css'))
+        ->prependStylesheet($this->basePath('css/ui-dark.css'));
     // Scripts
     echo $this->headScript()
+        ->appendFile($this->basePath('js/jquery-2.1.4.js'))
         ->appendFile($this->basePath('js/base.js'))
         ->appendFile($this->basePath('js/ui.js'))
+        ->appendFile($this->basePath('js/navigation.js'));
     ?>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a>
-                </li>
-            </ul>
-        </div><!-- /.nav-collapse -->
+<div id="createNavBar" data-win-control="WinJS.UI.NavBar" data-win-options="{
+    placement: 'top',
+    oninvoked: Navi.navBarInvoked
+}">
+    <div data-win-control="WinJS.UI.NavBarContainer">
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Delete', icon: 'delete' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Music', icon: 'audio' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Edit', icon: 'edit' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
     </div>
-</nav><!-- /nav -->
+</div><!-- /.navbar -->
 <div class="container">
     <?php echo $this->content; ?>
-
+    <br/>
+    <p id="status"></p>
 </div><!-- /.container -->
 <footer>
-    <hr><p>&copy; <?php echo date('Y') ?> | Cloud Nemo : <?php echo $this->translate('All rights reversed.') ?>
-        | Powered by Zend Technologies Ltd. | ZF-<?php echo (APPLICATION_ENV == 'local') ?
-            Zend\Version\Version::VERSION : null ?>
+    <hr><p>&copy; 2015<?php
+        echo ('2015' !== date('Y')) ? ' - ' . date('Y') : null ?> | Cloud Nemo : <?php
+        echo $this->translate('All rights reversed.') ?> | Powered by Zend Technologies Ltd.<?php
+        echo (APPLICATION_ENV == 'local') ? ' | ZF-' . Zend\Version\Version::VERSION : null ?>
     </p>
 </footer><!-- /footer -->
 <?php echo $this->inlineScript() ?><!-- /script -->
