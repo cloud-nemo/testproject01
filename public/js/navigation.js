@@ -6,7 +6,9 @@
  */
 function navBarInvoked(ev) {
     var navbarCommand = ev.detail.navbarCommand;
-    log(navbarCommand.label + " NavBarCommand invoked<br/>");
+    if (0 < navbarCommand.location.length) {
+        window.location.href = navbarCommand.location;
+    }
 }
 
 function log(msg) {

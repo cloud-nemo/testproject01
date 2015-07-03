@@ -12,8 +12,7 @@ echo $this->doctype(); ?>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <?php
     // Metas
-    echo $this->headTitle('Test-Project')
-        ->setSeparator(' - ')->setAutoEscape(false);
+    echo $this->headTitle();
     echo $this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
         ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
@@ -39,24 +38,29 @@ echo $this->doctype(); ?>
     oninvoked: Navi.navBarInvoked
 }">
     <div data-win-control="WinJS.UI.NavBarContainer">
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favorite', icon: 'favorite' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Delete', icon: 'delete' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Music', icon: 'audio' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Edit', icon: 'edit' }"></div>
-        <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Settings', icon: 'settings' }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand"
+             data-win-options="{ label: 'Home', icon: 'home', location:'<?php echo $this->basePath() ?>'}"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand"
+             data-win-options="{ label: 'World', icon: 'world', location:'<?php echo $this->basePath('world') ?>'
+             }"></div>
+        <div data-win-control="WinJS.UI.NavBarCommand"
+             data-win-options="{ label: 'World-Map', icon: 'map', location:'<?php echo $this->basePath('world/map')
+             ?>' }"></div>
     </div>
 </div><!-- /.navbar -->
 <div class="container">
-    <?php echo $this->content; ?>
-    <br/>
-    <p id="status"></p>
+    <div id="pageContent">
+        <?php echo $this->content; ?>
+        <br/>
+        <p id="status"></p>
+    </div>
 </div><!-- /.container -->
 <footer>
     <hr><p>&copy; 2015<?php
         echo ('2015' !== date('Y')) ? ' - ' . date('Y') : null ?> | Cloud Nemo : <?php
         echo $this->translate('All rights reversed.') ?> | Powered by Zend Technologies Ltd.<?php
-        echo (APPLICATION_ENV == 'local') ? ' | ZF-' . Zend\Version\Version::VERSION : null ?>
+        echo (APPLICATION_ENV == 'local') ? ' | ZF-' . Zend\Version\Version::VERSION : null
+    ?>
     </p>
 </footer><!-- /footer -->
 <?php echo $this->inlineScript() ?><!-- /script -->
