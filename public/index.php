@@ -17,7 +17,7 @@ if ($_SERVER['APPLICATION_ENV'] == 'local') {
 chdir(dirname(__DIR__));
 
 // Setup autoloading
-require 'library/autoload.php';
+require 'init_autoloader.php';
 
 // Run the application!
 Zend\Mvc\Application::init(require_once 'config/application.config.php')->run();
